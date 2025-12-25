@@ -1,0 +1,14 @@
+MEMBER( member_id PK, name, department, phone, email, date)
+EMPLOYEE( employee_id PK  , name, role, phone, email)
+AUTHOR(author_id PK, name, email)
+PUBLISHER(published_id PK, name, address, contact)
+BOOK(book_id PK, book_title, isbn, category, price, published_id FK)
+      .published_id references PUBLISHER(published_id)
+ISSUE(issue_id PK, issue_date, return_date, member_id FK, book_id FK, employee_id FK)
+      .member_id references MEMBER(member_id).
+      .book_id references BOOK(book_id).
+      .employee_id references EMPLOYEE(employee_id).
+AUTHOR_BOOK(author_id FK, book_id FK)
+      .Composite PK: (author_id, book_id).
+      .author_id references AUTHOR(author_id).
+      .book_id references BOOK(book_id).
